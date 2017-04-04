@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#実際に実行するスクリプト
+#実行するスクリプト
 
 from slackbot.bot import Bot
 def main():
