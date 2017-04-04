@@ -30,7 +30,7 @@ def weather(message):
     url = 'http://weather.livedoor.com/forecast/webservice/json/v1?city='
     # '130010'とすると東京の情報を取得してくれる
     # ここを変えれば任意の地域の天気情報を取得できる
-    city_id = '130010'
+    city_id = '140010'
 
     html = urllib.request.urlopen(url + city_id)
     jsonfile = json.loads(html.read().decode('utf-8'))
