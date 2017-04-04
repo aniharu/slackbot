@@ -1,6 +1,5 @@
 #coding:utf-8
-
-#aaaaaaa
+#pycharm access test by jackee777
 import requests
 
 URL='https://slack.com/api/chat.postMessage'
