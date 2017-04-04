@@ -39,7 +39,7 @@ def weather(message):
         .replace('でしょう。', 'にゃ。')\
         .replace('です。', 'にゃ。')\
         .replace('ください。', 'にゃ。')\
-        .replace('るため、。', 'て、')
+        .replace('るため、', 'て、')
     message.send(text)
 
 
