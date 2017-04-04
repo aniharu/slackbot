@@ -9,3 +9,5 @@ def cheer(message):
 def welcome_back(message):
     message.reply('おかえりなさい')
 
+
+
