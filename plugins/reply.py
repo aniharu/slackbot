@@ -1,5 +1,7 @@
 from slackbot.bot import respond_to
 from slackbot.bot import listen_to
+import urllib
+import json
 
 @respond_to('疲れた')
 @respond_to('つかれた')
@@ -25,9 +27,6 @@ def neko(message):
 @listen_to('雨')
 @respond_to('天気')
 def weather(message):
-    import urllib
-    import json
-
     url = 'http://weather.livedoor.com/forecast/webservice/json/v1?city='
     # '130010'とすると東京の情報を取得してくれる
     # ここを変えれば任意の地域の天気情報を取得できる
