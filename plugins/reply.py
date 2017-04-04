@@ -8,11 +8,16 @@ def cheer(message):
 
 @respond_to('ただいま')
 def welcome_back(message):
-    message.reply('おかえりなさい')
+    message.reply('おかえりにゃあ')
 
-@listen_to('おはよう')
+@respond_to('おはよう')
 def good_morning(message):
-    message.send('にゃあ')
+    message.reply('にゃあ')
+
+@listen_to('ねこ')
+@listen_to('猫')
+def neko(message):
+    message.send('にゃあ！')
 
 
 @listen_to('天気')
@@ -33,3 +38,5 @@ def weather(message):
     text = jsonfile['description']['text']
 
     message.send(text)
+
+
