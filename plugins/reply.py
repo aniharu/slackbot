@@ -35,11 +35,11 @@ def weather(message):
     html = urllib.request.urlopen(url + city_id)
     jsonfile = json.loads(html.read().decode('utf-8'))
     text = jsonfile['description']['text']
-    text = text.replace('ます。','るにゃあ。')\
-        .replace('でしょう。', 'にゃあ。')\
-        .replace('ます。', 'るにゃあ。')\
-        .replace('です。', 'にゃあ。')\
-        .replace('ください。', 'にゃあ。')
+    text = text.replace('ます。','るにゃ。')\
+        .replace('でしょう。', 'にゃ。')\
+        .replace('です。', 'にゃ。')\
+        .replace('ください。', 'にゃ。')\
+        .replace('るため、。', 'て、')
     message.send(text)
 
 
