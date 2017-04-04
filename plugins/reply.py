@@ -12,4 +12,4 @@ def welcome_back(message):
 
 @listen_to('おはよう')
 def good_morning(message):
-    message.reply('にゃあ')
+    message.send('にゃあ')
