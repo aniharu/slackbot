@@ -31,6 +31,12 @@ def good_morning(message):
 def takashima(message):
     message.reply('にゃっはー！！')
 
+@respond_to('わたり')
+def watari(message):
+    kuji = ["大吉", "吉", "中吉", "小吉", "末吉", "凶", "大凶", "矢鋪", "中古"]
+    message.reply('今日のわたりは' + str(random.choice(kuji)) + 'ですにゃ')
+
+
 @listen_to('ねこ')
 @listen_to('猫')
 def neko(message):
