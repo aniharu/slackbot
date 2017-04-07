@@ -59,7 +59,8 @@ def weather(message):
         .replace('でしょう','にゃ') \
         .replace('です', 'にゃ') \
         .replace('ください', 'にゃ')\
-        .replace('なる', 'にゃる')
+        .replace('なる', 'にゃる')\
+        .replace('。','。\n')
     message.send(text)
 
 @respond_to('なにしているの')
