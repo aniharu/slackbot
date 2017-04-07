@@ -2,6 +2,11 @@ from slackbot.bot import respond_to
 from slackbot.bot import listen_to
 import urllib
 import json
+import random
+
+@respond_to('乱数')
+def rnd(message):
+    message.reply(str(random.randint(0,99)))
 
 @respond_to('疲れた')
 @respond_to('つかれた')
