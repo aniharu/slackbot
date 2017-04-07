@@ -58,6 +58,18 @@ def weather(message):
         .replace('るため、', 'て、')
     message.send(text)
 
+@respond_to('なにしているの')
+def umeco(message):
+    rnlimit = 10
+    url = 'http://ja.wikipedia.org/w/api.php?action=query&list=random&rnnamespace=0&rnlimit='+ str(rnlimit) +'&format=json'
+    # print(url)
+    html = urllib.request.urlopen(url)
+    jsonfile = json.loads(html.read().decode('utf-8'))
+    text = []
+    for i in range(rnlimit):
+        text.append(jsonfile['query']['random'][i]['title'])
+    main_text = "今日は" + text[0] + 'で' + text[1] + 'と一緒に' + text[2] + 'をしているにゃ.'
+    message.send(main_text)
 
 ######################################################################
 #                       listen_to はここに書く                          #
