@@ -37,9 +37,9 @@ def good_morning(message):
 def takashima(message):
     message.reply('にゃっはー！！')
 
-@respond_to('わたり')
-def watari(message):
-    kuji = ["大吉", "吉", "中吉", "小吉", "末吉", "凶", "大凶", "矢鋪", "中古"]
+@respond_to('うらない')
+def fortune(message):
+    kuji = ["大吉", "中吉", "小吉",  "凶", "大凶", "凶斬り", "中古"]
     message.reply('今日のわたりは' + str(random.choice(kuji)) + 'ですにゃ')
 
 @respond_to('天気')
@@ -52,15 +52,18 @@ def weather(message):
     html = urllib.request.urlopen(url + city_id)
     jsonfile = json.loads(html.read().decode('utf-8'))
     text = jsonfile['description']['text']
-    text = text.replace('ます。','るにゃ。')\
-        .replace('でしょう。', 'にゃ。')\
-        .replace('です。', 'にゃ。')\
-        .replace('ください。', 'にゃ。')\
-        .replace('るため、', 'て、')
+    text = text.replace('\n','')\
+        .replace('います','いるにゃ') \
+        .replace('あります', 'あるにゃ') \
+        .replace('なり', 'にゃり') \
+        .replace('でしょう','にゃ') \
+        .replace('です', 'にゃ') \
+        .replace('ください', 'にゃ')\
+        .replace('なる', 'にゃる')
     message.send(text)
 
 @respond_to('なにしているの')
-def umeco(message):
+def wikipedia(message):
     text=functions.get_wiki_title()
     main_text = "今日は" + text[0] + 'で' + text[1] + 'と一緒に' + text[2] + 'をしているにゃ.'
     message.send(main_text)
