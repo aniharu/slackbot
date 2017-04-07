@@ -67,11 +67,3 @@ listen_to はここに書く
 @listen_to('猫')
 def neko(message):
     message.send('にゃあ！')
-
-
-@listen_to('天気')
-@listen_to('晴れ')
-@listen_to('雨')
-
-
-
