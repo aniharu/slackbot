@@ -5,6 +5,11 @@ import json
 import random
 import datetime
 
+'''
+######################################################################
+respond_to はここに書く
+######################################################################
+'''
 @respond_to('乱数')
 def rnd(message):
     message.reply(str(random.randint(0,99)))
@@ -36,16 +41,6 @@ def watari(message):
     kuji = ["大吉", "吉", "中吉", "小吉", "末吉", "凶", "大凶", "矢鋪", "中古"]
     message.reply('今日のわたりは' + str(random.choice(kuji)) + 'ですにゃ')
 
-
-@listen_to('ねこ')
-@listen_to('猫')
-def neko(message):
-    message.send('にゃあ！')
-
-
-@listen_to('天気')
-@listen_to('晴れ')
-@listen_to('雨')
 @respond_to('天気')
 def weather(message):
     url = 'http://weather.livedoor.com/forecast/webservice/json/v1?city='
@@ -62,5 +57,21 @@ def weather(message):
         .replace('ください。', 'にゃ。')\
         .replace('るため、', 'て、')
     message.send(text)
+
+'''
+######################################################################
+listen_to はここに書く
+######################################################################
+'''
+@listen_to('ねこ')
+@listen_to('猫')
+def neko(message):
+    message.send('にゃあ！')
+
+
+@listen_to('天気')
+@listen_to('晴れ')
+@listen_to('雨')
+
 
 
