@@ -3,10 +3,16 @@ from slackbot.bot import listen_to
 import urllib
 import json
 import random
+import datetime
 
 @respond_to('乱数')
 def rnd(message):
     message.reply(str(random.randint(0,99)))
+
+@respond_to('今何時')
+def print_now(message):
+    todaydetail = datetime.datetime.today()
+    message.reply("%s" % todaydetail)
 
 @respond_to('疲れた')
 @respond_to('つかれた')
