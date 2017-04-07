@@ -16,6 +16,10 @@ def welcome_back(message):
 def good_morning(message):
     message.reply('にゃあ')
 
+@respond_to('たかっしー')
+def takashima(message):
+    message.reply('にゃっはー！！')
+
 @listen_to('ねこ')
 @listen_to('猫')
 def neko(message):
