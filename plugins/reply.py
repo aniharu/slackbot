@@ -36,30 +36,33 @@ def good_morning(message):
 def takashima(message):
     message.reply('にゃっはー！！')
 
-@respond_to('わたり')
+@respond_to('うらない')
 def watari(message):
-    kuji = ["大吉", "吉", "中吉", "小吉", "末吉", "凶", "大凶", "矢鋪", "中古"]
-    message.reply('今日のわたりは' + str(random.choice(kuji)) + 'ですにゃ')
+    kuji = ["大吉", "大福" , "中吉", "小吉", "凶", "大凶", "凶斬り", "中古"]
+    message.reply('今日の運勢は' + str(random.choice(kuji)) + 'ですにゃ')
 
 @respond_to('天気')
 def weather(message):
     url = 'http://weather.livedoor.com/forecast/webservice/json/v1?city='
     # '130010'とすると東京の情報を取得してくれる
     # ここを変えれば任意の地域の天気情報を取得できる
-    city_id = '140010'
+    city_id = '10010'
 
     html = urllib.request.urlopen(url + city_id)
     jsonfile = json.loads(html.read().decode('utf-8'))
-    text = jsonfile['description']['text']
-    text = text.replace('ます。','るにゃ。')\
-        .replace('でしょう。', 'にゃ。')\
-        .replace('です。', 'にゃ。')\
-        .replace('ください。', 'にゃ。')\
-        .replace('るため、', 'て、')
+    text = jsonfile['descripti4on']['text']
+    text = text.replace('\n','')\
+        .replace('います','いるにゃ') \
+        .replace('あります', 'あるにゃ') \
+        .replace('なり', 'にゃり') \
+        .replace('でしょう','にゃ') \
+        .replace('です', 'にゃ') \
+        .replace('ください', 'にゃ')\
+        .replace('なる', 'にゃる')
     message.send(text)
 
 @respond_to('なにしているの')
-def umeco(message):
+def wikipedia(message):
     rnlimit = 10
     url = 'http://ja.wikipedia.org/w/api.php?action=query&list=random&rnnamespace=0&rnlimit='+ str(rnlimit) +'&format=json'
     # print(url)
