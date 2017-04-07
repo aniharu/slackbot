@@ -1,9 +1,10 @@
 from slackbot.bot import respond_to
 from slackbot.bot import listen_to
-import urllib
-import json
 import random
 import datetime
+import urllib
+import json
+import functions
 
 
 #######################################################################
@@ -36,10 +37,10 @@ def good_morning(message):
 def takashima(message):
     message.reply('にゃっはー！！')
 
-@respond_to('うらない')
+@respond_to('わたり')
 def watari(message):
-    kuji = ["大吉", "大福" , "中吉", "小吉", "凶", "大凶", "凶斬り", "中古"]
-    message.reply('今日の運勢は' + str(random.choice(kuji)) + 'ですにゃ')
+    kuji = ["大吉", "吉", "中吉", "小吉", "末吉", "凶", "大凶", "矢鋪", "中古"]
+    message.reply('今日のわたりは' + str(random.choice(kuji)) + 'ですにゃ')
 
 @respond_to('天気')
 def weather(message):
@@ -51,26 +52,16 @@ def weather(message):
     html = urllib.request.urlopen(url + city_id)
     jsonfile = json.loads(html.read().decode('utf-8'))
     text = jsonfile['description']['text']
-    text = text.replace('\n','')\
-        .replace('います','いるにゃ') \
-        .replace('あります', 'あるにゃ') \
-        .replace('なり', 'にゃり') \
-        .replace('でしょう','にゃ') \
-        .replace('です', 'にゃ') \
-        .replace('ください', 'にゃ')\
-        .replace('なる', 'にゃる')
+    text = text.replace('ます。','るにゃ。')\
+        .replace('でしょう。', 'にゃ。')\
+        .replace('です。', 'にゃ。')\
+        .replace('ください。', 'にゃ。')\
+        .replace('るため、', 'て、')
     message.send(text)
 
 @respond_to('なにしているの')
-def wikipedia(message):
-    rnlimit = 10
-    url = 'http://ja.wikipedia.org/w/api.php?action=query&list=random&rnnamespace=0&rnlimit='+ str(rnlimit) +'&format=json'
-    # print(url)
-    html = urllib.request.urlopen(url)
-    jsonfile = json.loads(html.read().decode('utf-8'))
-    text = []
-    for i in range(rnlimit):
-        text.append(jsonfile['query']['random'][i]['title'])
+def umeco(message):
+    text=functions.get_wiki_title()
     main_text = "今日は" + text[0] + 'で' + text[1] + 'と一緒に' + text[2] + 'をしているにゃ.'
     message.send(main_text)
 
