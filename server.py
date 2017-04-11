@@ -8,7 +8,7 @@ BUFF = 1024
 port_num = 2
 
 class ThreadedServer(object):
-    def __init__(self, host = "192.168.1.3", port = 8000):
+    def __init__(self, host, port):
         self.host = host
         self.port = port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -37,7 +37,7 @@ class ThreadedServer(object):
                 client.close()
                 return False
 
-server = ThreadedServer()
+server = ThreadedServer(host, port)
 
 if __name__ == "__main__":
     server.listen()
