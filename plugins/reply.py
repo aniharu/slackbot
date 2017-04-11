@@ -113,14 +113,14 @@ def Horoscopes(message):  # 星座占い
         main_text = ''
         for t in constellation:
             if t['sign'] == x:
-                main_text = ("占い結果： %s\n" % t['content'])
-                main_text = ("金運： %s\n" % create_star(x=t['money']))
-                main_text = ("仕事運： %s\n" % create_star(x=t['job']))
-                main_text = ("恋愛運： %s\n" % create_star(x=t['love']))
-                main_text = ("総合運： %s\n" % create_star(x=t['total']))
-                main_text = ("ラッキーアイテム： %s\n" % t['item'])
-                main_text = ("ラッキーカラー： %s色\n" % t['color'])
-                main_text = ("ランキング： %s位\n" % t['rank'])
+                main_text += ("占い結果： %s\n" % t['content'])
+                main_text += ("金運： %s\n" % create_star(x=t['money']))
+                main_text += ("仕事運： %s\n" % create_star(x=t['job']))
+                main_text += ("恋愛運： %s\n" % create_star(x=t['love']))
+                main_text += ("総合運： %s\n" % create_star(x=t['total']))
+                main_text += ("ラッキーアイテム： %s\n" % t['item'])
+                main_text += ("ラッキーカラー： %s色\n" % t['color'])
+                main_text += ("ランキング： %s位\n" % t['rank'])
 
         message.send(main_text)
 
