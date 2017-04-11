@@ -1,6 +1,7 @@
 from slackbot.bot import respond_to
 from slackbot.bot import listen_to
 import random
+import requests
 import datetime
 import urllib
 import json
@@ -77,6 +78,50 @@ def timer(message):
     timer = threading.Timer(100, hello)
     timer.start()
 
+@respond_to('牡羊座')
+@respond_to('牡牛座')
+@respond_to('双子座')
+@respond_to('蟹座')
+@respond_to('獅子座')
+@respond_to('乙女座')
+@respond_to('天秤座')
+@respond_to('蠍座')
+@respond_to('射手座')
+@respond_to('山羊座')
+@respond_to('水瓶座')
+@respond_to('魚座')
+def Horoscopes(message):  # 星座占い
+    input_horoscopes = message.body['text']  # 入力したメッセージを取得
+
+    def create_star(x):  # ５段階評価を星で表現
+        return '★' * x
+
+    def main(x):
+        # 占い配信 Web ad Fortune
+        today = datetime.date.today()
+        url = 'http://api.jugemkey.jp/api/horoscope/free/%d/%d/%d' % (today.year, today.month, today.day)
+
+        # JSONを読み込む
+        j = requests.get(url).json()
+        # JSONをパースする
+        constellation = [x for v in j['horoscope'].values() for x in v]
+
+        main_text = ''
+        for t in constellation:
+            if t['sign'] == x:
+                main_text += ("占い結果： %s\n" % t['content'])
+                main_text += ("金運： %s\n" % create_star(x=t['money']))
+                main_text += ("仕事運： %s\n" % create_star(x=t['job']))
+                main_text += ("恋愛運： %s\n" % create_star(x=t['love']))
+                main_text += ("総合運： %s\n" % create_star(x=t['total']))
+                main_text += ("ラッキーアイテム： %s\n" % t['item'])
+                main_text += ("ラッキーカラー： %s色\n" % t['color'])
+                main_text += ("ランキング： %s位\n" % t['rank'])
+
+        message.send(main_text)
+
+    # 星座占い結果を表示する
+    main(x=input_horoscopes)
 
 
 ######################################################################
