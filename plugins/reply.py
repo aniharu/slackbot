@@ -70,12 +70,17 @@ def wikipedia(message):
     message.send(main_text)
 
 @respond_to('ムスカ')
-def timer(message):
+def musuka(message):
     message.send('3分間待ってにゃる！')
     def hello():
         message.send('時間にゃ！答えを聞こう！')
-    timer = threading.Timer(100, hello)
+    timer = threading.Timer(180, hello)
     timer.start()
+
+@respond_to('バルス')
+def bals(text):
+    text.send('目がぁぁぁ、目がぁぁぁぁ')
+
 
 
 
