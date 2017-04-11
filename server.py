@@ -2,10 +2,9 @@
 import socket
 import threading
 
-host = "your ip address" 
+host = "your ip address"
 port = 8000
 BUFF = 1024
-port_num = 2
 
 class ThreadedServer(object):
     def __init__(self, host, port):
@@ -37,7 +36,8 @@ class ThreadedServer(object):
                 client.close()
                 return False
 
-server = ThreadedServer(host, port)
+
 
 if __name__ == "__main__":
-    server.listen()
+    ThreadedServer(host, port).listen()
+
