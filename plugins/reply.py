@@ -5,7 +5,7 @@ import datetime
 import urllib
 import json
 import functions
-
+import threading
 
 #######################################################################
 #                       respond_to はここに書く                          #
@@ -39,8 +39,8 @@ def takashima(message):
 
 @respond_to('うらない')
 def fortune(message):
-    kuji = ["大吉", "中吉", "小吉",  "凶", "大凶", "凶斬り", "中古"]
-    message.reply('今日のわたりは' + str(random.choice(kuji)) + 'ですにゃ')
+    kuji = ["大吉", "中吉", "小吉",  "凶", "大凶", "冥府破滅凶", "中古"]
+    message.reply('今日の運勢は' + str(random.choice(kuji)) + 'ですにゃ')
 
 @respond_to('天気')
 def weather(message):
@@ -68,6 +68,16 @@ def wikipedia(message):
     text=functions.get_wiki_title()
     main_text = "今日は" + text[0] + 'で' + text[1] + 'と一緒に' + text[2] + 'をしているにゃ.'
     message.send(main_text)
+
+@respond_to('ムスカ')
+def timer(message):
+    message.send('3分間待ってにゃる！')
+    def hello():
+        message.send('時間にゃ！答えを聞こう！')
+    timer = threading.Timer(100, hello)
+    timer.start()
+
+
 
 ######################################################################
 #                       listen_to はここに書く                          #
