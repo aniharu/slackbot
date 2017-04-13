@@ -76,20 +76,18 @@ class client(object):
 
         #to wait time and sleep
         weight = -1
-        time_weight = [15, 60, 180, 120, 180]
+        time_weight = [3,3,3,3,3]#[15, 60, 180, 120, 180]
 
         #when server_down and presence, we send presence information
         try:
             if self.state_on:
-                print(self.state_on)
+                #print(self.state_on)
                 try:
                     self.client.send(str(self.state_on).encode("utf-8"))
                 except socket.error:
-                    return 0
+                    self.state_on = 0
         except AttributeError:
             self.state_on = 0
-
-        self.state_on = 0
 
         while (1):
             before_point.x = after_point.x
