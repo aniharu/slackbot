@@ -11,12 +11,12 @@ import subprocess
 サーバーダウン時、サーバーが動き始めるまでコネクトし続ける。
 サーバーが落ちた時、出席していれば送りなおす
 2.衝突したとき
-15秒待って、アクセスを4回繰り返す。
-4回はなんとなく、15秒はサーバーのタイムアウトが10秒なので
+15秒待。15秒はサーバーのタイムアウトが10秒なので
 3.始めに繋がらなかったとき
+接続できるまでがんばる
 """
 
-host = "0.0.0.0"#server ip address
+host = "0.0.0.0"#server's ip address
 port = 8000     #your fabortite port
 wait_num = 1    #int, when wait_connection, need to repeat
 
@@ -48,7 +48,7 @@ class client(object):
                 self.client.connect((self.host, self.port))
                 break
             except socket.error as exc:
-                print("Caught exception socket.error : %s" % exc)
+                #print("Caught exception socket.error : %s" % exc)
                 #for reconnection error not to continue connecting
                 if self.error["ERROR_10053"] or self.error["ERROR_10054"] \
                     or self.error["ERROR_10056"] or self.error["ERROR_10057"]:
@@ -66,7 +66,6 @@ class client(object):
             try:
                 self.client.send(str(self.state_on).encode("utf-8"))
             except socket.error:
-                print("hi")
                 continue
             return 1
         return 0
@@ -105,7 +104,7 @@ class client(object):
                     try:
                         self.client.send(str(self.state_on).encode("utf-8"))
                     except socket.error as exc:
-                        print("Caught exception socket.error : %s" % exc)
+                        #print("Caught exception socket.error : %s" % exc)
                         if self.error["ERROR_10053"]:#repeat connection
                             time.sleep(15)
                             break
@@ -117,7 +116,7 @@ class client(object):
                 try:
                     self.client.send(str(self.state_on).encode("utf-8"))
                 except socket.error as exc:
-                    print("Caught exception socket.error : %s" % exc)
+                    #print("Caught exception socket.error : %s" % exc)
                     if self.error["ERROR_10053"]:#repeat connection
                         time.sleep(15)
                         break
