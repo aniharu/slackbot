@@ -16,7 +16,7 @@ import subprocess
 3.始めに繋がらなかったとき
 """
 
-host = "133.2.208.31"#yout ip address
+host = "0.0.0.0"#server ip address
 port = 8000     #your fabortite port
 wait_num = 1    #int, when wait_connection, need to repeat
 
