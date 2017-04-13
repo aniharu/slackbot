@@ -5,6 +5,17 @@ import socket
 import errno
 import subprocess
 
+"""
+対応してるエラー：
+1.サーバーダウン時の再接続
+サーバーダウン時、サーバーが動き始めるまでコネクトし続ける。
+サーバーが落ちた時、出席していれば送りなおす
+2.衝突したとき
+15秒待って、アクセスを4回繰り返す。
+4回はなんとなく、15秒はサーバーのタイムアウトが10秒なので
+3.始めに繋がらなかったとき
+"""
+
 host = "0.0.0.0"#yout ip address
 port = 8000     #your fabortite port
 wait_num = 4    #int, when wait_connection, need to repeat
