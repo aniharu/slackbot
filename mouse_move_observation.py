@@ -16,9 +16,9 @@ import subprocess
 3.始めに繋がらなかったとき
 """
 
-host = "0.0.0.0"#yout ip address
+host = "133.2.208.31"#yout ip address
 port = 8000     #your fabortite port
-wait_num = 4    #int, when wait_connection, need to repeat
+wait_num = 1    #int, when wait_connection, need to repeat
 
 # define mouse pointer class
 class _pointer(ctypes.Structure):
@@ -55,6 +55,7 @@ class client(object):
                     break
                 continue
 
+    #うまくいかないとこです。
     def wait_connection(self):
         #occur a wait connection to wait and repeat to send information
         #Um... x does not increase, so i use while method
@@ -65,6 +66,7 @@ class client(object):
             try:
                 self.client.send(str(self.state_on).encode("utf-8"))
             except socket.error:
+                print("hi")
                 continue
             return 1
         return 0
@@ -80,13 +82,8 @@ class client(object):
 
         #when server_down and presence, we send presence information
         try:
-            if self.state_on:
-                #print(self.state_on)
-                try:
-                    self.client.send(str(self.state_on).encode("utf-8"))
-                except socket.error:
-                    self.state_on = 0
-        except AttributeError:
+             self.client.send(str(self.state_on).encode("utf-8"))
+        except (AttributeError, socket.error):
             self.state_on = 0
 
         while (1):
@@ -110,10 +107,8 @@ class client(object):
                     except socket.error as exc:
                         print("Caught exception socket.error : %s" % exc)
                         if self.error["ERROR_10053"]:#repeat connection
-                            if self.wait_connection():
-                                continue
-                            else:
-                                break
+                            time.sleep(15)
+                            break
                         elif self.error["ERROR_10054"]:#give up connection
                             break
             #send absence
@@ -124,10 +119,8 @@ class client(object):
                 except socket.error as exc:
                     print("Caught exception socket.error : %s" % exc)
                     if self.error["ERROR_10053"]:#repeat connection
-                        if self.wait_connection():
-                            continue
-                        else:
-                            break
+                        time.sleep(15)
+                        break
                     elif self.error["ERROR_10054"]:#give up connection
                         break
 
