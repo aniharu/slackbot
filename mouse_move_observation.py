@@ -77,11 +77,11 @@ class client(object):
 
         #to wait time and sleep
         weight = -1
-        time_weight = [3,3,3,3,3]#[15, 60, 180, 120, 180]
+        time_weight = [15, 60, 180, 120, 180]
 
         #when server_down and presence, we send presence information
         try:
-             self.client.send(str(self.state_on).encode("utf-8"))
+            self.client.send(str(self.state_on).encode("utf-8"))
         except (AttributeError, socket.error):
             self.state_on = 0
 
@@ -96,20 +96,20 @@ class client(object):
                 #weight is almost over 0 and it is rarely -1
                 #(when over 1 is presence, when -1, absence)
                 weight = weight - 1 if weight >= 0 and self.state_on else 0
-            elif weight != 3:#time_weight does not correspond over 3
-                weight += 1
+            else:#time_weight does not correspond over 3
+                if weight != (len(time_weight) - 2):
+                    weight += 1
                 #send presence
-                if weight == 1 and self.state_on != 1:
-                    self.state_on = 1
-                    try:
-                        self.client.send(str(self.state_on).encode("utf-8"))
-                    except socket.error as exc:
-                        #print("Caught exception socket.error : %s" % exc)
-                        if self.error["ERROR_10053"]:#repeat connection
-                            time.sleep(15)
-                            break
-                        elif self.error["ERROR_10054"]:#give up connection
-                            break
+                self.state_on = 1
+                try:
+                    self.client.send(str(self.state_on).encode("utf-8"))
+                except socket.error as exc:
+                    #print("Caught exception socket.error : %s" % exc)
+                    if self.error["ERROR_10053"]:#repeat connection
+                        time.sleep(15)
+                        break
+                    elif self.error["ERROR_10054"]:#give up connection
+                        break
             #send absence
             if weight == -1:
                 self.state_on = 0
