@@ -8,11 +8,6 @@ import json
 import functions
 import threading
 
-class Spell:
-    def exec(self):
-        @respond_to('バルス')
-        def bals(message):
-            message.send('目がぁぁぁ、目がぁぁぁぁ')
 
 #######################################################################
 #                       respond_to はここに書く                          #
@@ -83,8 +78,10 @@ def musuka(message):
         message.send('時間にゃ！答えを聞こう！')
     timer = threading.Timer(180, hello)
     timer.start()
-    spell = Spell
-    spell.exec
+
+@respond_to('バルス')
+def bals(message):
+    message.send('目がぁぁぁ、目がぁぁぁぁ')
 
 @respond_to('牡羊座')
 @respond_to('牡牛座')
