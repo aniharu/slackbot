@@ -82,6 +82,45 @@ def musuka(message):
 def bals(text):
     text.send('目がぁぁぁ、目がぁぁぁぁ')
 
+timer_user = []
+@respond_to('タイマー')
+@respond_to('timer')
+def request_timer(message):
+    global timer_user
+    if message._client.users[message._get_user_id()]['name'] not in timer_user:
+         timer_user.append(message._client.users[message._get_user_id()]['name'])
+    message.send("どんくらいにゃ？")
+
+@respond_to('(.*)秒')
+@respond_to('(.*)s')
+def request_timer(message, params):
+    try:
+        params = int(params)
+        global timer_user
+        if message._client.users[message._get_user_id()]['name'] in timer_user:
+            def end_time():
+                message.send('%d秒だにゃ!' % params)
+            timer = threading.Timer(params, end_time)
+            timer.start()
+            timer_user.remove(message._client.users[message._get_user_id()]['name'])
+    except:
+        pass
+
+@respond_to('(.*)分')
+@respond_to('(.*)m')
+def request_timer(message, params):
+    try:
+        params = int(params)
+        global timer_user
+        if message._client.users[message._get_user_id()]['name'] in timer_user:
+            def end_time():
+                message.send('%d分だにゃ!' % params)
+            timer = threading.Timer(60 * params, end_time)
+            timer.start()
+            timer_user.remove(message._client.users[message._get_user_id()]['name'])
+    except:
+        pass
+
 @respond_to('牡羊座')
 @respond_to('牡牛座')
 @respond_to('双子座')
