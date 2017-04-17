@@ -8,6 +8,7 @@ import json
 import functions
 import threading
 
+
 #######################################################################
 #                       respond_to はここに書く                          #
 #######################################################################
@@ -79,8 +80,8 @@ def musuka(message):
     timer.start()
 
 @respond_to('バルス')
-def bals(text):
-    text.send('目がぁぁぁ、目がぁぁぁぁ')
+def bals(message):
+    message.send('目がぁぁぁ、目がぁぁぁぁ')
 
 timer_user = []
 @respond_to('タイマー')

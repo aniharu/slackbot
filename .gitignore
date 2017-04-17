@@ -1,3 +1,5 @@
 #tokenが記載されたファイルをgitできないように
 slackbot_settings.py
 .idea
+__pycache__/
+plugins/__pycache__/
