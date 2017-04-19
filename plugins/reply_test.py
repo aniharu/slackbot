@@ -26,7 +26,7 @@ def multiple_replace(text,adict):
 #######################################################################
 
 
-@respond_to('天気2')
+@respond_to('てんき')
 def weather(message):
     url = 'http://weather.livedoor.com/forecast/webservice/json/v1?city='
     # '130010'とすると東京の情報を取得してくれる
